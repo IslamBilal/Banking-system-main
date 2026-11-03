@@ -92,7 +92,7 @@ Run the SQL script against a test database first and review each statement befor
 
 ## Security Notes
 
-- The current database connection helper contains hardcoded local connection values; replace these with environment variables before sharing or deploying.
+- Database credentials are now read from the repository-level `.env` file using `BANK_DB_HOST`, `BANK_DB_PORT`, `BANK_DB_NAME`, `BANK_DB_USER`, and `BANK_DB_PASSWORD`. Keep `.env` local and untracked.
 - The current PIN hashing approach in the application uses SHA-256 without a per-user salt. This is not appropriate for production authentication; use a dedicated password-hashing algorithm such as Argon2id or bcrypt with unique salts.
 - Admin/audit operations in a command-line learning project are not a substitute for real role-based access control.
 - Use test data only.
