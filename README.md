@@ -56,7 +56,7 @@ cd Banking-system-main
 ### 2. Install the Python dependency
 
 ```bash
-pip install psycopg2-binary
+pip install -r requirements.txt
 ```
 
 ### 3. Create the database
@@ -65,7 +65,7 @@ Create a PostgreSQL database named `BankData` using pgAdmin or psql.
 
 ### 4. Configure the database connection
 
-Update the connection settings used by `SQL3/Database.py` for your local PostgreSQL host, database, username, and password. Do not commit real database passwords to the repository. The connection helper currently contains example local connection values and should be moved to environment-based configuration before deployment.
+Copy `.env.example` to `.env` in the repository root and set your local PostgreSQL values. The application reads `BANK_DB_HOST`, `BANK_DB_PORT`, `BANK_DB_NAME`, `BANK_DB_USER`, and `BANK_DB_PASSWORD` from that file. Never commit `.env` or real credentials.
 
 ### 5. Run the application
 
@@ -92,7 +92,7 @@ Run the SQL script against a test database first and review each statement befor
 
 ## Security Notes
 
-- The current database connection helper contains hardcoded local connection values; replace these with environment variables before sharing or deploying.
+- Database credentials are now read from the repository-level `.env` file using `BANK_DB_HOST`, `BANK_DB_PORT`, `BANK_DB_NAME`, `BANK_DB_USER`, and `BANK_DB_PASSWORD`. Keep `.env` local and untracked.
 - The current PIN hashing approach in the application uses SHA-256 without a per-user salt. This is not appropriate for production authentication; use a dedicated password-hashing algorithm such as Argon2id or bcrypt with unique salts.
 - Admin/audit operations in a command-line learning project are not a substitute for real role-based access control.
 - Use test data only.
